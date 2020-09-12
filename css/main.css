@@ -1,0 +1,58 @@
+body html {
+    font-family: 'Metropolis';
+    width: 100%;
+}
+
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+#inputValue {
+    display: inline-flex;
+    align-content: center;
+    padding: .75rem;
+    border-radius: .25rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333333;
+    background-color: white;
+    border: 1px solid lightgrey;
+    display: block;
+}
+
+section {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    justify-content: center;
+    margin: 1rem 1rem;
+    text-align: center;
+    transform-style: preserve-3d;
+    padding: 1rem 1rem 1rem 1rem;
+}
+
+section img {
+    pointer-events: none;
+    width: 200px;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin-bottom: 2rem;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+    position: relative;
+}
+
+
+
+.content {
+    height: 300px;
+    ;
+}
+
+.content-display {
+    display: block;
+}
