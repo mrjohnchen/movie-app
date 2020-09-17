@@ -3,7 +3,6 @@ body html {
     width: 100%;
 }
 
-
 .form-group {
     margin-bottom: 1rem;
 }
@@ -22,37 +21,59 @@ body html {
     display: block;
 }
 
+#movies-searchable {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.movie {
+    margin-bottom: 50px;
+}
+
 section {
     display: flex;
     width: 100%;
-    overflow-x: auto;
-    justify-content: center;
+    overflow-x: hidden;
     margin: 1rem 1rem;
-    text-align: center;
-    transform-style: preserve-3d;
-    padding: 1rem 1rem 1rem 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 section img {
-    pointer-events: none;
-    width: 200px;
+    width: 150px;
     border-radius: 1rem;
     padding: 0.5rem;
     margin-bottom: 2rem;
-    transform: translateZ(0);
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
     box-shadow: 0 0 5px rgba(0, 0, 0, .1);
     position: relative;
+    transition: 250ms all;
 }
 
-
+img:hover {
+    margin-left: 0 40px;
+    transform: scale(1.05);
+    cursor: pointer;
+}
 
 .content {
-    height: 300px;
-    ;
+    border: 1px solid grey;
+    padding: 20px;
+    display: none;
+}
+
+#content-close {
+    cursor: pointer;
+}
+
+.content div {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px;
 }
 
 .content-display {
     display: block;
+
 }

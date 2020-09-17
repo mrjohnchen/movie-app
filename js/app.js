@@ -1,51 +1,45 @@
-//Initial Values
-const API_KEY = 'e8f5f4a83b543d169d392a9f4ee0d5ea';
-const url = 'https://api.themoviedb.org/3/search/movie?api_key=e8f5f4a83b543d169d392a9f4ee0d5ea'
-const image_url = 'https://image.tmdb.org/t/p/w500';
-
-
 // Selecting elements from the DOM
 const buttonElement = document.querySelector('#search');
 const inputElement = document.querySelector('#inputValue');
 const movieSearchable = document.querySelector('#movies-searchable');
-
-function generateUrl(path) {
-    const url = `https://api.themoviedb.org/3${path}?api_key=e8f5f4a83b543d169d392a9f4ee0d5ea`;
-    return url;
-}
-
-function requestMovies(url, onComplete, onError) {
-    fetch(newUrl)
-        .then((res) => res.json())
-        .then(renderSearchMovies)
-        .catch((error) => {
-            console.log('Error: ', error);
-        });
-    inputElement.value = '';
-    console.log('Value: ', value);
-}
-}
+const movieContainer = document.querySelector('#movies-container');
 
 function movieSection(movies) {
-    return movies.map((movie) => {
-        return `<img src=${image_url + movie.poster_path} data-movie-id=${movie.id}/>`;
+    const section = document.createElement('section');
+    section.classList = 'section';
+
+    movies.map((movie) => {
+        if (movie.poster_path) {
+            const img = document.createElement('img');
+            img.src = image_url + movie.poster_path;
+            img.setAttribute('data-movie-id', movie.id);
+
+            section.appendChild(img);
+        }
     })
+
+    return section;
 }
 
-function createMovieContainer(movies) {
+function createMovieContainer(movies, title = '') {
     const movieElement = document.createElement('div');
     movieElement.setAttribute('class', 'movie');
 
-    const movieTemplate = `
-    <section class="section">
-        ${movieSection(movies)}
-    </section>
-    <div class="content">
-        <p id="content-close">X</p>
-    </div>
-    `;
+    const header = document.createElement('h2');
+    header.innerHTML = title;
 
-    movieElement.innerHTML = movieTemplate;
+    const content = document.createElement('div');
+    content.classList = 'content';
+
+    const contentClose = `<p id="content-close">X</p>`;
+
+    content.innerHTML = contentClose;
+
+    const section = movieSection(movies);
+
+    movieElement.appendChild(header);
+    movieElement.appendChild(section);
+    movieElement.appendChild(content);
     return movieElement;
 }
 
@@ -55,13 +49,13 @@ function renderSearchMovies(data) {
     const movies = data.results;
     const movieBlock = createMovieContainer(movies);
     movieSearchable.appendChild(movieBlock);
-    console.log('Data: ', data);
 }
 
-function searchMovie(value) {
-    const path = '/search/movie';
-    const url = generateUrl(path) + '&query=' + value;
-    requestMovies(url, renderSearchMovies, handleError);
+function renderMovies(data) {
+    // data.results []
+    const movies = data.results;
+    const movieBlock = createMovieContainer(movies, this.title);
+    movieContainer.appendChild(movieBlock);
 }
 
 function handleError(error) {
@@ -91,10 +85,20 @@ function createVideoTemplate(data, content) {
     }
 }
 
+function createIframe(video) {
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${video.key}`;
+    iframe.width = 360;
+    iframe.height = 315;
+    iframe.allowFullscreen = true;
+
+    return iframe;
+}
+
 //Event Delegation
 document.onclick = function (event) {
 
-    const target = event.target;
+    const target = event.target; //DOM element is not present unless user clicks
 
     if (target.tagName.toLowerCase() === 'img') {
         const movieId = target.dataset.movieId;
@@ -102,17 +106,6 @@ document.onclick = function (event) {
         const section = event.target.parentElement; //section
         const content = section.nextElementSibling; //content
         content.classList.add('content-display');
-
-
-        //fetch movie videos
-        fetch(url)
-            .then((res) => res.json())
-            .then((data) => {
-
-            })
-            .catch((error) => {
-
-            });
     }
 
     if (target.id === 'content-close') {
@@ -120,3 +113,11 @@ document.onclick = function (event) {
         content.classList.remove('content-display');
     }
 }
+
+searchMovie('spiderman');
+
+getUpcomingMovies();
+
+getTopRatedMovies();
+
+getPopularMovies();
