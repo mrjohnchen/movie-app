@@ -49,7 +49,7 @@ function createMovieContainer(movies, title = '') {
     const content = document.createElement('div');
     content.classList = 'content';
 
-    const contentClose = `<p id="content-close">Close</p>`;
+    const contentClose = `<h4 id="content-close">Close</h4>`;
 
     content.innerHTML = contentClose;
 
@@ -127,8 +127,6 @@ buttonElement.onclick = function (event) {
 }
 
 document.onclick = function (event) {
-    $('#movies-container').modal('show');
-
     const target = event.target;
 
     if (target.tagName.toLowerCase() === 'img') {
