@@ -91,11 +91,6 @@ function createVideoTemplate(data, content) {
     content.innerHTML = '<h4 id="content-close">Close</h4>';
     console.log('Videos: ', data);
     const videos = data.results;
-
-    if (videos.length == 0) {
-        noVideoContainer.style.display = "block";
-    }
-
     const length = videos.length > 4 ? 4 : videos.length;
     const iframeContainer = document.createElement('div');
 
